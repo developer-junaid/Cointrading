@@ -117,7 +117,7 @@ const Main = () => {
                     width={25}
                   />
                 </div>
-                <div className={style.currencySelectorTicker}>USDT</div>
+                <div className={style.currencySelectorTicker}>CTD</div>
               </div>
             </div>
           </div>

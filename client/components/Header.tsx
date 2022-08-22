@@ -30,7 +30,6 @@ const style = {
 };
 
 const Header = () => {
-  const [selectedNav, setSelectedNav] = useState("swap");
   const { connectWallet, currentAccount, disconnect } =
     useContext(TransactionContext);
 
