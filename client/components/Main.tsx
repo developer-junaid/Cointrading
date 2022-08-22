@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext } from "react"
 
 // Next
-import Image from "next/image";
-import { useRouter } from "next/router";
+import Image from "next/image"
+import { useRouter } from "next/router"
+
+// Context
+import { TransactionContext } from "../context/TransactionContext"
 
 // Icons
-import { RiSettings3Fill } from "react-icons/ri";
-import { RiArrowDownFill } from "react-icons/ri";
-import { AiOutlineDown } from "react-icons/ai";
+import { RiArrowDownFill } from "react-icons/ri"
 
-import ethLogo from "../public/eth.png";
-import tetherLogo from "../public/tether-usdt-logo.svg";
-import ctdLogo from "../public/logo.png";
+import tetherLogo from "../public/tether-usdt-logo.svg"
+import ctdLogo from "../public/logo.png"
 
 const style = {
-  wrapper: `w-screen flex items-center justify-center mt-14`,
+  wrapper: `w-screen flex flex-col items-center justify-center mt-8`,
   content: `bg-white w-[35rem] rounded-3xl px-4 py-2`,
   formHeader: `px-2 py-4 flex items-center justify-between text-black font-medium text-xl`,
   transferPropContainer: `bg-[#ececec] my-3 rounded-2xl p-6 text-3xl  border-none hover:border-[#41444F]  flex justify-between`,
@@ -25,28 +25,15 @@ const style = {
   currencySelectorTicker: `ml-1 text-base`,
   currencySelectorArrow: `text-lg`,
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-2 px-8 text-lg font-medium flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
-};
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#0a0b0d",
-    padding: 0,
-    border: "none",
-  },
-  overlay: {
-    backgroundColor: "rgba(10, 11, 13, 0.75)",
-  },
-};
+}
 
 const Main = () => {
-  const handleChange = (e: any, amount: string) => {};
+  const { connectWallet, currentAccount, disconnect } =
+    useContext(TransactionContext)
 
-  const handleSubmit = (e: any) => {};
+  const handleChange = (e: any, amount: string) => {}
+
+  const pay = () => {}
 
   return (
     <div className={style.wrapper}>
@@ -132,12 +119,27 @@ const Main = () => {
           />
           <div className={style.currencySelector}></div>
         </div> */}
-        <div className={style.confirmButton} onClick={(e) => handleSubmit(e)}>
-          Unlock Wallet
-        </div>
+        {currentAccount ? (
+          <div className={style.confirmButton} onClick={() => pay()}>
+            Pay
+          </div>
+        ) : (
+          <div className={style.confirmButton} onClick={() => connectWallet()}>
+            Unlock Wallet
+          </div>
+        )}
       </div>
+      <iframe
+        width="400"
+        height="200"
+        src="https://www.youtube.com/embed/xlHldvMNK8Q"
+        title="YouTube video player"
+        className="my-4"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      ></iframe>{" "}
     </div>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

@@ -53,6 +53,14 @@ const Footer = () => {
           <Image width={25} height={25} src={githubIcon} />
         </a>
       </div>
+      <div
+        className={`flex flex-col justify-start items-start bg-cover bg-[url("https://makecoin.live/pic/ctd/bg-prime.jpg")] text-white rounded-lg p-6 w-[30rem] mb-10`}
+      >
+        <p className="text-2xl mb-6">Swap CTD Token Instant (Pre-Sale)</p>
+        <p className="mb-2">1 USDT = 1.25 CTD (Cointrading Token)</p>
+        <p className="mb-2">0.1 USDT = 0.125 CTD (Cointrading Token)</p>
+        <p className="mb-2">0.01 USDT = 0.025 CTD (Cointrading Token)</p>
+      </div>
     </div>
   )
 }
