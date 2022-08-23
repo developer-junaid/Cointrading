@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 
 // Next
 import Image from "next/image"
@@ -28,12 +28,18 @@ const style = {
 }
 
 const Main = () => {
-  const { connectWallet, currentAccount, disconnect } =
-    useContext(TransactionContext)
+  const {
+    connectWallet,
+    currentAccount,
+    disconnect,
+    usdtBalance,
+    ctdBalance,
+    buyTokens,
+  } = useContext(TransactionContext)
+  const [amountUsdt, setAmountUsdt] = useState(1)
 
-  const handleChange = (e: any, amount: string) => {}
-
-  const pay = () => {}
+  console.log("BALANCE USDT: ", usdtBalance)
+  console.log("BALANCE CTD: ", ctdBalance)
 
   return (
     <div className={style.wrapper}>
@@ -47,16 +53,18 @@ const Main = () => {
         <div className="bg-[#ececec] my-3 px-6 py-3 rounded-2xl">
           <div className="text-black flex justify-between font-semibold">
             <label htmlFor="from">From</label>
-            <label htmlFor="amount">Balance: 0.0000</label>
+            <label htmlFor="amount">Balance: {usdtBalance}</label>
           </div>
 
           <div className="rounded-2xl text-3xl mt-4 flex justify-between">
             <input
-              type="text"
+              type="number"
               className="bg-transparent text-black placeholder:text-gray-400 outline-none mb-2 border-b-2 border-b-gray-300 w-4/3 text-lg"
               placeholder="0.00"
               pattern="^[0-9]*[.,]?[0-9]*$"
-              onChange={(e) => handleChange(e, "amount")}
+              onChange={(e) => setAmountUsdt(parseFloat(e.target.value))}
+              value={amountUsdt}
+              min={1}
             />
 
             <div className={style.currencySelector}>
@@ -82,16 +90,17 @@ const Main = () => {
         <div className="bg-[#ececec] my-3 px-6 py-3 rounded-2xl">
           <div className="text-black flex justify-between font-semibold">
             <label htmlFor="from">To</label>
-            <label htmlFor="amount">Balance: 0.0000</label>
+            <label htmlFor="amount">Balance: {ctdBalance}</label>
           </div>
 
           <div className="rounded-2xl text-3xl mt-4 flex justify-between">
             <input
-              type="text"
+              type="number"
               className="bg-transparent text-black placeholder:text-gray-400 outline-none mb-2 border-b-2 border-b-gray-300 w-4/3 text-lg"
               placeholder="0.00"
               pattern="^[0-9]*[.,]?[0-9]*$"
-              onChange={(e) => handleChange(e, "amount")}
+              value={(amountUsdt * 5) / 4}
+              readOnly
             />
 
             <div className={style.currencySelector}>
@@ -120,7 +129,10 @@ const Main = () => {
           <div className={style.currencySelector}></div>
         </div> */}
         {currentAccount ? (
-          <div className={style.confirmButton} onClick={() => pay()}>
+          <div
+            className={style.confirmButton}
+            onClick={() => buyTokens(amountUsdt)}
+          >
             Pay
           </div>
         ) : (
