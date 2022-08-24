@@ -33,7 +33,7 @@ const Header = () => {
   const { connectWallet, currentAccount, disconnect } =
     useContext(TransactionContext);
 
-  console.log(currentAccount, connectWallet);
+  // console.log(currentAccount, connectWallet);
 
   return (
     <div className={style.wrapper}>

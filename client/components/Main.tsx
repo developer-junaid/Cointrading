@@ -38,8 +38,8 @@ const Main = () => {
   } = useContext(TransactionContext)
   const [amountUsdt, setAmountUsdt] = useState(1)
 
-  console.log("BALANCE USDT: ", usdtBalance)
-  console.log("BALANCE CTD: ", ctdBalance)
+  // console.log("BALANCE USDT: ", usdtBalance)
+  // console.log("BALANCE CTD: ", ctdBalance)
 
   return (
     <div className={style.wrapper}>
