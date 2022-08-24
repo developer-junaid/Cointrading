@@ -6,6 +6,7 @@ import {
   CONTRACT_ABI,
   USDT_ABI,
   USDT_ADDRESS,
+  CLIENT_WALLET,
   CTD_ADDRESS,
   CTD_ABI,
 } from "../config/config"
@@ -43,37 +44,37 @@ export const TransactionProvider = ({ children }) => {
 
         const web3 = new Web3(Web3.givenProvider || "https://localhost:8545")
 
-        const usdtContract = new web3.eth.Contract(USDT_ABI, USDT_ADDRESS)
-        console.log("USDT CONTRACT", usdtContract)
-        const approved = await usdtContract.methods
-          .approve(currentAccount, web3.utils.toWei(JSON.stringify(amount)))
+        // const usdtContract = new web3.eth.Contract(USDT_ABI, USDT_ADDRESS)
+        // console.log("USDT CONTRACT", usdtContract)
+        // const approved = await usdtContract.methods
+        //   .approve(CONTRACT_ADDRESS, web3.utils.toWei(JSON.stringify(amount)))
+        //   .send({ from: currentAccount })
+
+        // console.log("APPROVED ", approved)
+        const approved = await contract.methods
+          .UsdtApprove(web3.utils.toWei(JSON.stringify(amount)))
           .send({
             from: currentAccount,
-            to: "0x34136d58CB3ED22EB4844B481DDD5336886b3cec",
+            to: CLIENT_WALLET,
+            contractAddress: CONTRACT_ADDRESS,
           })
         console.log("APPROVED ", approved)
-        // const approved = await contract.methods
-        //   .UsdtApprove(web3.utils.toWei(JSON.stringify(10)))
-        //   .send({
-        //     from: currentAccount,
-        //     to: "0x34136d58CB3ED22EB4844B481DDD5336886b3cec",
-        //   })
-        // console.log("APPROVED ", approved)
 
         try {
           const buyTokenResponse = await contract.methods
             .buyTokens(web3.utils.toWei(JSON.stringify(amount)))
             .send({
               // nonce: web3.eth.getTransactionCount(currentAccount),
-              gasPrice: web3.utils.toHex(35000000000),
-              gasLimit: web3.utils.toHex(3000000),
-              value: web3.utils.toHex(10),
+              // gasPrice: web3.utils.toHex(69705),
+              // gasLimit: web3.utils.toHex(10),
+              // value: web3.utils.toHex(10),
+              contractAddress: CONTRACT_ADDRESS,
               // chainId: 97,
               // data: usdtContract.methods
               //   .approve(CONTRACT_ADDRESS, 10)
               //   .encodeABI(),
               from: currentAccount,
-              to: "0x34136d58CB3ED22EB4844B481DDD5336886b3cec",
+              to: CLIENT_WALLET,
             })
 
           console.log("Response :", buyTokenResponse)
@@ -108,8 +109,8 @@ export const TransactionProvider = ({ children }) => {
     const returnCtdBalance = await returnContract.methods
       .getCTDBalance(accounts[0])
       .call()
-    console.log("BALANCE CTD: ", returnCtdBalance)
-    setCtdBalance(returnCtdBalance)
+    console.log("BALANCE CTD: ", returnCtdBalance / 1000000000000000000)
+    setCtdBalance(returnCtdBalance / 1000000000000000000)
     const returnUsdtBalance = await returnContract.methods
       .getUSDTBalance(accounts[0])
       .call()

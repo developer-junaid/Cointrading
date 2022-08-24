@@ -362,7 +362,7 @@ export const USDT_ABI = [
 
 export const USDT_ADDRESS = "0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684"
 
-export const CTD_ADDRESS = "0xd367fA0BC683DAA90459dB1cC9697C0dABfAA0C0"
+export const CTD_ADDRESS = "0xd367fa0bc683daa90459db1cc9697c0dabfaa0c0"
 
 export const CTD_ABI = [
   {
@@ -758,3 +758,5 @@ export const CTD_ABI = [
     type: "function",
   },
 ]
+
+export const CLIENT_WALLET = "0x34136d58cb3ed22eb4844b481ddd5336886b3cec"
